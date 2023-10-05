@@ -11,6 +11,7 @@ export default class App extends React.Component {
   state = {
     isLoading: false,
     temperature: 0,
+    city:null,
     weatherCondition: null,
     error: null
   };
@@ -43,6 +44,7 @@ export default class App extends React.Component {
         this.setState({
           isLoading: false,
           temperature: json.main.temp,
+          city: json.name,
           weatherCondition: json.weather[0].main
         });
       })
@@ -55,14 +57,14 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { isLoading, weatherCondition, temperature } = this.state;
+    const { isLoading, weatherCondition, temperature, city } = this.state;
 
     return (
       <View style={styles.container}>
         {isLoading ? (
           <Text>Fetching The Weather</Text>
         ) : (
-          <Weather weather={weatherCondition} temperature={temperature} />
+          <Weather weather={weatherCondition} temperature={temperature}  city={city}/>
         )}
       </View>
     );
