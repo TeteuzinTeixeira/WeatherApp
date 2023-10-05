@@ -8,7 +8,7 @@ const Weather = ({ weather, temperature, city }) => {
   const weatherData = weatherConditions[weather];
 
   if (!weatherData) {
-    return null; // Renderiza nada se a condição do tempo não estiver definida
+    return alert('carregando...'); // Renderiza nada se a condição do tempo não estiver definida
   }
 
   return (
@@ -19,13 +19,19 @@ const Weather = ({ weather, temperature, city }) => {
       ]}
     >
       <View style={styles.headerContainer}>
+
+        
         <MaterialCommunityIcons
           size={72}
           name={weatherConditions[weather].icon}
           color={'#fff'}
         />
-        <Text style={styles.tempText}>{temperature}˚</Text>
-        <Text style={styles.tempText}>{city}</Text>
+
+        <View style={styles.boxTempCity}>
+          <Text style={styles.tempText}>{temperature}˚C</Text>
+          <Text style={styles.cityText}>{city}</Text>
+        </View>
+
       </View>
       <View style={styles.bodyContainer}>
         <Text style={styles.title}>{weatherConditions[weather].title}</Text>
@@ -53,10 +59,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around'
   },
+
+  boxTempCity:{
+    flexDirection:'column'
+  },
   tempText: {
     fontSize: 72,
     color: '#fff'
   },
+
+  cityText: {
+    fontSize: 24,
+    color: '#fff'
+  },
+
   bodyContainer: {
     flex: 2,
     alignItems: 'flex-start',
